@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>版本控制工具--git,github</title>
+</head>
+<body>
+    <h1>git:版本控制工具</h1>
+    <h1>github:网站，社交平台，开源项目，远程仓库</h1>
+    svn：集成式<br/>
+    git :分布式<br/>
+    name,email <br/>
+    设置： <br/>
+    git config --global user.name '~~~~~'<br/>
+    git config --global useremail '~~~~~~'<br/>
+    查看： <br/>
+    git config --global user.name<br/>
+    git config --global useremail<br/>
+    查看所有配置： <br/>
+    git config --list<br/>
+    包括如下： <br/>
+    core.symlinks=false<br/>
+    core.autocrlf=true<br/>
+    color.diff=auto<br/>
+    color.status=auto<br/>
+    color.branch=auto<br/>
+    color.interactive=true<br/>
+    pack.packsizelimit=2g<br/>
+    help.format=html<br/>
+    http.sslcainfo=d:/Program Files (x86)/Git/mingw32/ssl/certs/ca-bundle.crt<br/>
+    diff.astextplain.textconv=astextplain<br/>
+    rebase.autosquash=true<br/><br/>
+    user.name=ReadyGoOn<br/>
+    user.email=18320850996@139.com<br/><br/>
+    core.repositoryformatversion=0<br/>
+    core.filemode=false<br/>
+    core.bare=false<br/>
+    core.logallrefupdates=true<br/>
+    core.symlinks=false<br/>
+    core.ignorecase=true<br/>
+    core.hidedotfiles=dotGitOnly<br/>
+    remote.origin.url=https://github.com/ReadyGoOn/drag.git<br/>
+    remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*<br/>
+    branch.master.remote=origin<br/>
+    <h1>git的三个区：</h1>
+    1.工作区
+    <p>
+        2.暂存区：作为过度，避免误操作，保护工作区和版本区，分支处理
+    </p>
+    3.版本区（库）
+    <h6>git 命令</h6>
+    1.git status:查看工作区和暂存区的状态
+    <br/>
+    2.git add 文件名。后缀  或者 git add.  .:表示全部提交
+    <br/>
+    3.git commit  -m "提交的描述信息"
+如果我们这里不用-m参数的话，git将调到一个文本编译器（通常是vim）来让你输入提交的描述信息
+可能一天下来，你对工作树中的许多文档都进行了更新（文档添加、修改、删除），但是我忘记了它们的名字，此时若将所做的全部更新添加到索引中，比较轻省的做法就是：
+git commit -a -m "提交的描述信息"
+git commit 命令的-a 选项可只将所有被修改或者已删除的且已经被git管理的文档提交倒仓库中。如果只是修改或者删除了已被Git 管理的文档，是没必要使用git add 命令的。
+git add .命令除了能够判断出当前目录（包括其子目录）所有被修改或者已删除的文档，还能判断用户所添加的新文档，并将其信息追加到索引中。
+git commit --amend 对于已经修改提交过的注释，如果需要修改，可以借助 git commit --amend 来进行。
+  例如 在framework/base 里最新的提交就是 resolving the roaming problem，我现在需要将其改为 resolving the roaming problem for fixing bug 7732
+  在 framework/base 下 输入 git commit --amend,就会进入一个文本编辑界面（如下），在注释的地方修改 ，保存然后退出，这样注释就修改了，再重新push.
+  <br/>
+  4.git push
+  <h1>git reset HEAD 文件名 （add后的可撤回）</h1>
+  git commit -a -m '~~~'
+  <p>
+      git log:看日志
+  </p>
+  <h2>对比</h2>
+  1.git diff 工作区与暂存区对比<br/>
+  2.git diff --cached(--staged) 暂存区与版本区对比<br/>
+  3.git diff master 工作区与版本区对比<br/>
+  <h2>撤销</h2>
+  1.git reset HEAD file.name 暂存区 -》工作区<br/>
+  2.git checkout --file.name<br/>
+  3.git commit --amend <br/>
+</body>
+</html>

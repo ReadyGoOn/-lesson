@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跨域</title>
+    <style>
+    h6{
+        font-size:20px;
+    }
+    </style>
+</head>
+<body>
+    <a href="https://www.baidu.com/">www.baidu.com</a>
+    <h1>js跨域</h1>
+    没有跨域:<br/>
+    www.a.com/a.js<br/>
+    www.a.com/c.b.js<br/>
+    跨域:<br/>
+    www.a.com<br/>
+    www.6.com<br/>
+    <p>
+        ajax:XMLHttpRequest():不能跨域
+    </p>
+    1.主子域名间的跨域：<br/>
+    在父子域名间都设置document.domain = '主域名'；<br/>
+    <p>
+        2.不同域名间通过服务器代理：XMLHttpRequest代理文件
+    </p>
+    <h6>
+        <p>以下3种为主要的：</p>
+        3.script标签(jsnop = json + padding) ---（单域操作）<br/>
+        3.1:先写一个函数作为回调函数来处理请求回来的数据<br/>
+        3.2:在(一般动态)创建script标签，并设置src的值为请求路径附上回调和请求参数如：<br/>
+        src="http://dsafdasfdsaf?name=xxx&user=xxx&callback=box<br/>
+        name，user 为参数名，xxx为参数值，box回调函数。<br/>
+        <strong>回调一定要写在请求的srcipt前<br/></strong>
+        <p>
+            4.location.hash  ---（双域操作）<br/>
+            iframe src="xxxx#key1=11&key2=22"<br/>
+            通过parent.location.hash <br/>
+        </p>
+        5.window.name = 'xxxxxx'  ---（比较安全写在window.name中）
+    </h6>
+   
+    <p>
+        6.flash
+    </p>
+    7.html5 postMessage
+
+
+
+
+
+
+    <script>
+       
+        var url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=&json=1&p=3&sid=22163_1421_21120_18560_20239&req=2&sc=eb&csor=0&cb=box&_=1496028186231";
+        // createScript("jsonp.js");
+        createScript(url);
+        function box(data){
+            console.log(data);
+        }
+        function createScript(url){
+            var oscript = document.createElement("script");
+            oscript.src = url;
+            oscript.type = 'text/javascript'
+            document.body.appendChild(oscript);
+        }
+        var cat = {};
+        cat.name = "猫";
+        cat.color = "白色";
+        cat.show = function(){alert(111)}
+        console.group('-');
+        console.log("11");
+        console.log('22');
+        console.groupEnd();
+       console.dir(cat);
+       console.log(cat);
+    //    var d = 1;
+    //    console.assert(d);
+    //    console.assert(!d);
+        // console.trace();//查看执行顺序
+
+        // console.time('333');
+        // console.timeEnd('333');
+
+         console.profile();
+        console.profileEnd();
+    </script>
+    <!--<script src="jsonp.js"></script>-->
+
+
+
+
+</body>
+</html>

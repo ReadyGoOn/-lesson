@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML5-history(历史管理)</title>
+</head>
+<body>
+    <h1>HTML5-history(历史管理)</h1>
+    <input type="button" name="" value="35选7" id="btn">
+    <div id="div1"></div>
+    <p>
+        <h1>1.onhashchange:改变hash值来管理</h1>
+        onhashchange:window事件，当hash值有变化的时候，会触发该事件。
+    </p>
+    <h1>2.history:</h1>
+    -pushState:三个参数：数据，标题（都没实现），地址（可选）<br/>
+    -popstate事件：读取数据 event.state<br/>
+    -注意：网址是虚假的，需要在服务器指定对应的页面，不然刷新找不到对应的页面
+    <script>
+        window.onload = function(){
+            var obtn = document.getElementById("btn");
+            var odiv = document.getElementById("div1");
+            var obj = {};
+            var inow = 1 ;
+            obtn.onclick = function(){
+                var number = randomNum(35,7);
+                odiv.innerHTML = number;
+                // var rad = Math.random();
+                // obj[rad] = number ;
+                // window.location.hash = rad ;
+
+                history.pushState(number,'',inow++);
+            }
+
+            window.onpopstate = function(ev){
+                var ev = ev || window.event ;
+                var number = ev.state || '';
+                odiv.innerHTML = number;
+            }
+            // window.onhashchange = function(){
+            //      odiv.innerHTML = obj[window.location.hash.substr(1)] || '';
+            // };
+            function randomNum(alls,now){
+                var arr = [];
+                var newArr = []
+                for(var i=1;i<=alls;i++){
+                    arr.push(i);
+                }
+                 for(var i=0;i<now;i++){
+                    //  var num =Math.floor(Math.random()*(arr.length-1);
+                    // newArr.push(arr[num]);
+                     var num =Math.floor(Math.random()*arr.length);
+                    newArr.push(arr.splice( Math.floor(Math.random()*arr.length),1 ));
+                }
+                return newArr;
+            }
+        }
+    </script>
+</body>
+</html>

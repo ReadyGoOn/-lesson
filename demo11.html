@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片切换</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .box{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+    }
+    .box1{
+        left: 100px;
+        top:100px;
+        background: red;
+        z-index: 1;
+    }
+    .box2{
+        left: 150px;
+        top:80px;
+        background: blue;
+        z-index: 2;
+    }
+    .box3{
+        left: 200px;
+        top:100px;
+        background: orange;
+        z-index: 1;
+    }
+    </style>
+</head>
+<body>
+    <div id="div1">1,2,3,4</div>
+    <button type="button" id="btn">切换</button>
+    <p>
+    <button id="left">向左</button>
+    <button id="right">向右</button>
+    </p>
+    <div class="box box1"></div>
+    <div class="box box2"></div>
+    <div class="box box3"></div>
+    <script src="common.js"></script>
+    <script>
+        window.onload = function(){
+            var odiv = document.getElementById("div1");
+            var obtn = document.getElementById("btn");
+            obtn.onclick = function(){
+                var arr = odiv.innerHTML.split(',');
+                // arr.push(arr[0]);//尾部添加元素
+                // arr.shift();//数组头部删除元素
+                arr.unshift(arr[arr.length-1]);//数组头部添加元素
+                arr.pop();//尾部删除元素
+                odiv.innerHTML = arr ;
+            }
+
+            var oleft = document.getElementById("left");
+            var oright = document.getElementById("right");
+            var obox = document.getElementsByClassName("box");
+            var arr = [];//存储各div的left,top值。
+
+            for(var i=0,len=obox.length;i<len;i++){
+                arr.push([
+                    parseInt(getStyle(obox[i],'top')),
+                    parseInt(getStyle(obox[i],'left')),
+                    getStyle(obox[i],'opacity'),
+                    getStyle(obox[i],'zIndex')]);
+            }
+            console.log(arr);
+
+            oleft.onclick = function(){
+                arr.push(arr[0]);
+                arr.shift();
+                 for(var i=0,len=obox.length;i<len;i++){
+                    startMove( obox[i],{top:arr[i][0],left:arr[i][1]});
+                    obox[i].style.zIndex = arr[i][3];
+                }
+            };
+            oright.onclick = function(){
+                arr.unshift(arr[arr.length - 1]);
+                arr.pop();
+                 for(var i=0,len=obox.length;i<len;i++){
+                     startMove( obox[i],{top:arr[i][0],left:arr[i][1]});
+                    obox[i].style.zIndex = arr[i][3];
+                    
+
+                }
+            };
+        }
+    </script>
+</body>
+</html>

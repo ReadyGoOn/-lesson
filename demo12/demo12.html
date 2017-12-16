@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自适应屏幕宽度的轮播图</title>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+#div1{
+    margin:50px auto;
+    width: 350px;
+    height: 240px;
+    border: 1px solid red;
+    position: relative;
+    overflow: hidden;
+}
+ul{
+    position: absolute;
+}
+li{
+    width: 350px;
+    height: 240px;
+    list-style: none;
+    float: left;
+    position: relative;
+}
+img{
+    position: absolute;
+	left: 50%;
+	top: 50%;
+    transform: translate(-50%,-50%);
+}
+#btn{
+    position: absolute;
+    top:85%;
+    width:100%;
+    text-align: center;
+}
+a{
+    padding-left:15px;
+    margin:5px;
+    background: red;
+}
+/*a:hover{
+    background: blue;
+}*/
+.active{
+    background: #000;
+}
+</style>
+<body>
+    <h1>自适应屏幕宽度的轮播图</h1>
+    <div id="div1">
+        <ul>
+            <li><img src="images/1.jpg" alt="图片"></li>
+            <li><img src="images/2.jpg" alt="图片"></li>
+            <li><img src="images/3.jpg" alt="图片"></li>
+            <li><img src="images/4.jpg" alt="图片"></li>
+            <li><img src="images/5.jpg" alt="图片"></li>
+            <li><img src="images/6.jpg" alt="图片"></li>
+            <li><img src="images/7.jpg" alt="图片"></li>
+            <li><img src="images/8.jpg" alt="图片"></li>
+            <li><img src="images/9.jpg" alt="图片"></li>
+            <li><img src="images/10.jpg" alt="图片"></li>
+        </ul>
+        <div id="btn">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div> 
+    </div>
+    <script src="../common.js"></script>
+    <script>
+        window.onload = function(){
+            var odiv = document.getElementById("div1");
+            var oul = odiv.getElementsByTagName("ul")[0];
+            var ali = odiv.getElementsByTagName("li");
+            var aimg = odiv.getElementsByTagName("img");
+
+            var obtn = document.getElementById("btn");
+            var oa = obtn.getElementsByTagName("a");
+
+            var timer = null ;
+            var index = 0 ;
+            var inow = 0 ;
+
+            oul.style.width = ali[0].clientWidth*ali.length + "px";
+            
+            for(var i=0,len = oa.length;i<len;i++){
+                // (function(i){
+                //     console.log(i);
+                //     oa[i].onclick = function(){
+                //         for(var j=0,len = oa.length;j<len;j++){
+                //             oa[j].className = '';
+                //         }
+                //         oa[i].className = 'active';
+                //     }
+                // })(i)
+  
+      
+                // oa[i].onclick = (function(i){
+                //      return function(){
+                //         for(var j=0,len = oa.length;j<len;j++){
+                //             oa[j].className = '';
+                //         }
+                //         oa[i].className = 'active';
+                //      }
+                // })(i)
+
+                oa[i].index = i ;
+                oa[i].onclick = function(){
+                    for(var j=0,len = oa.length;j<len;j++){
+                        oa[j].className = '';
+                    }
+                    this.className = 'active';
+                    startMove(oul,{left:-this.index*ali[0].clientWidth})
+                }
+            }
+
+            //自动播放
+            setInterval(function(){
+                if(index >= ali.length-1){
+                    // ali[0].style.position = 'relative';
+                    ali[0].style.left = ali.length*ali[0].clientWidth + 'px';
+                    index = 0;
+                }else{
+                    index++;
+                }
+                inow++ ;
+                console.log(index);
+
+                 for(var j=0,len = oa.length;j<len;j++){
+                        oa[j].className = '';
+                    }
+                    oa[index].className = 'active';
+
+                startMove(oul,{left:-inow*ali[0].clientWidth},function(){
+                    if( index == 0){
+                        // ali[0].style.position = 'relative';
+                        oul.style.left = 0
+                        inow = 0;
+                    }
+                });
+                
+                
+            },1000);
+        }
+    </script>
+</body>
+</html>

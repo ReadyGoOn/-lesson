@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iframe</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            width:300px;
+        }
+        #div1{
+            width:300px;
+            height:300px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <h1>我是iframe的内容</h1>
+    </div>
+        <input type="button" name="" value="改变" id="btn1">
+    <script>
+        window.onload = function(){
+            // if(window != window.top){
+            //     window.top.location.href = window.location.href;
+            // }
+
+            var obtn = document.getElementById("btn1");
+            var demo1 = window.parent.document.getElementById("demo1");
+
+            obtn.onclick = function(){
+                demo1.style.color = "red";
+            }
+
+
+            
+        }
+    </script>
+</body>
+</html>

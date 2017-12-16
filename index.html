@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    ul{
+        margin:50px 0 0 50px;
+        display:inline-block;
+        overflow:hidden;
+    }
+    li{
+        width: 260px;
+        margin-top:20px;
+        display: inline-block;
+    }
+    a{
+        text-decoration:none;
+    }
+    span{
+        padding-left:20px;
+    }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li><input type="color"><span></span></li>
+        <li><a href="dom.html">1.dom优化</a></li>
+        <li><a href="dom1/1demo/index.html">2.联动下拉菜单</a></li>
+        <li><a href="demo3.html">3.快速排序</a></li>
+        <li><a href="demo4/index.html">4.iframe及其操作</a></li>
+        <li><a href="demo5.html">5.事件委托</a></li>
+        <li><a href="demo6.html">6.闭包</a></li>
+        <li><a href="demo7.html">7.对象的引用</a></li>
+        <li><a href="demo8/demo8.html">8.跨域</a></li>
+        <li><a href="demo9.html">9.HTML5-history(历史管理)</a></li>
+        <li><a href="demo10.html">10.百叶窗效果</a></li>
+        <li><a href="demo11.html">11.图片切换</a></li>
+        <li><a href="demo12/demo12.html">12.自适应屏幕宽度的轮播图</a></li>
+        <li><a href="demo13.html">13.自适应屏幕宽度的轮播图(2)</a></li>
+        <li><a href="demo14.html">14.js实现分页效果</a></li>
+        <li><a href="demo15.html">15.dom操作</a></li>
+        <li><a href="demo16.html">16.版本控制工具--git,github</a></li>
+        <li><a href="demo9.html">9.HTML5-history(历史管理)</a></li>
+        <li><a href="demo10.html">10.百叶窗效果</a></li>
+        <li><a href="demo11.html">11.图片切换</a></li>
+        <li><a href="demo12.html">12.自适应屏幕宽度的轮播图</a></li>
+    </ul>
+
+
+    <script>
+        window.onload = function(){
+            window.name = "先写一个函数作为回调函数来处理请求回来的数据";
+            var oinput = document.getElementsByTagName('input')[0];
+            var ospan = document.getElementsByTagName('span')[0];
+            var oa = document.getElementsByTagName('a');
+            oinput.onchange = function(){
+                ospan.innerHTML = oinput.value;
+                for(var i=0,len=oa.length;i<len;i++){
+                    oa[i].style.color =  oinput.value;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

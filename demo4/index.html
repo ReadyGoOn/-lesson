@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iframe操作</title>
+</head>
+<body>
+    <div id="demo1">
+        1.引入iframe页面
+        <p>
+            2.contentWindow.document所有浏览器都支持，<br/>
+            contentDocument IE678不支持
+        </p>
+        3.嵌套多层时（iframe中在嵌套iframe）：<br/>
+        3.1.window.parent.document可获取父层元素document<br/>
+        3.2.window.top.document可获取最顶层元素document<br/>
+        <p>
+            4.案例
+        </p>
+        4.1防钓鱼网站：<br/>
+        看当前的window是否等于window.top的window，if（window != window.top）{window.top.location.href = window.location.href;}
+    </div>
+    <input type="button" name="" value="改变" id="btn">
+    <input type="button" name="" value="改变大小" id="btn1">
+    <iframe src="iframe.html" id="iframe1" frameborder="0" scrolling="no"></iframe>
+     <script>
+        window.onload = function(){
+            var obtn = document.getElementById("btn");
+            var obtn1 = document.getElementById("btn1");
+            var oiframe = document.getElementById("iframe1");
+
+            obtn.onclick = function(){
+                // alert(oiframe.contentWindow);
+                // oiframe.contentWindow.document.getElementById("div1").style.cssText = 'width:300px;height:200px;color:red;border:1px solid red;';
+                oiframe.contentDocument.getElementById("div1").style.cssText = "width:300px;height:200px;border:1px solid red;"
+            }
+
+             obtn1.onclick = function(){
+                changeHeight();
+            }
+            function changeHeight(){
+                oiframe.height = oiframe.contentWindow.document.body.offsetHeight;
+                console.log(oiframe.height,oiframe.contentWindow.document.body.offsetWidth);
+                oiframe.width = oiframe.contentWindow.document.body.offsetWidth;
+            }
+
+            
+        }
+    </script>
+</body>
+</html>
